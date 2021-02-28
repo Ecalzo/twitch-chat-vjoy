@@ -49,5 +49,6 @@ def main_consumer(queue: Queue) -> None:
             break
         elif controller_input is not None:
             logging.info(f"executing raw input: {controller_input}...")
+            time.sleep(.05)
             execute_button_press(controller_input)
             logging.info(f"successfully executed raw input: {controller_input}")
