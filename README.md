@@ -21,7 +21,13 @@ vim producer.py  # update the globals in producer.py
 python main.py
 ```
 
+Chat controls the game like this:
+```
+nyccoder: !up 10  # results in 10 presses up the "up" button
+```
+
 ## Roadmap/QoL Improvements
 * .ini file for twitch chat setup
 * .ini file for button mapping
-* remove !press from command, make them like !a or !b
+* remove !press from command, make them like !a or !b - DONE
+* be able to press a button n number of times (limit this) - DONE
