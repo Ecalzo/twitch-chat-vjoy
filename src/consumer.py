@@ -4,12 +4,14 @@ import time
 from queue import Queue
 
 BUTTON_MAPPING = {
-    "a": 2,
-    "b": 3,
-    "x": 4,
-    "y": 5,
-    "z": 6,
-    "start": 7
+    "up": 1,
+    "down": 2,
+    "left": 3,
+    "right": 4,
+    "start": 5,
+    "select": 6,
+    "b": 7,
+    "a": 8
 }
 
 logging.basicConfig(level=logging.DEBUG,
@@ -23,6 +25,8 @@ def map_button_press_to_input(button_press: str) -> int:
         return BUTTON_MAPPING[button_press]
     elif button_press == "escape":
         return 0
+    else:
+        return None
 
 def execute_button_press(joy_inpt: int) -> None:
     joy = pyvjoy.VJoyDevice(1)
@@ -43,7 +47,7 @@ def main_consumer(queue: Queue) -> None:
         if controller_input == 0:
             logging.info(f"received kill signal {controller_input}, exiting")
             break
-        else:
+        elif controller_input is not None:
             logging.info(f"executing raw input: {controller_input}...")
             execute_button_press(controller_input)
             logging.info(f"successfully executed raw input: {controller_input}")
