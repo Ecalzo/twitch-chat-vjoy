@@ -10,12 +10,18 @@ twitch-chat-vjoy is a tool for converting button presses from twitch chat into r
 - Consumer reads the latest entry in the queue and executes it as a vjoy controller
 
 ## Usage
-This section will be changing as usage evolves
-```shell
+This section will be changing as usage evolves.
+Since vJoy is used, Windows 10 is only supported and tested.
+```powershell
 git clone <this_repo>
-export TWITCH_OATH = "<my_oath_token>"
+$ENV:TWITCH_OATH = "<my_oath_token>"
 pip install -r requirements.txt
 cd src/
 vim producer.py  # update the globals in producer.py  
 python main.py
 ```
+
+## Roadmap/QoL Improvements
+* .ini file for twitch chat setup
+* .ini file for button mapping
+* remove !press from command, make them like !a or !b
