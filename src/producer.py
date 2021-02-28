@@ -32,14 +32,14 @@ def clean_chat_input(chat_text: str) -> str:
     pass
 
 def push_to_queue_if_valid_input(message: str, queue: Queue) -> str:
-    inpt_as_list = message.lower().split("!press")
-    len_check = len(inpt_as_list)
-    if len_check > 1 and len_check < 3:
-        button_press = inpt_as_list[-1].strip()
-        queue.put(button_press)
-        return button_press
-    else:
-        return ""
+    if message.startswith("!"):
+        inpt_as_list = message.lower().split("!")
+        len_check = len(inpt_as_list)
+        if len_check > 1 and len_check < 3:
+            button_press = inpt_as_list[-1].strip()
+            queue.put(button_press)
+            return button_press
+    return ""
 
 
 def main_producer(queue: Queue) -> None:
