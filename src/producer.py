@@ -2,21 +2,30 @@ import socket
 import re
 import os
 import logging
+from configparser import ConfigParser
 from queue import Queue
 from datetime import datetime
 
+config = ConfigParser()
+config.read("config.ini")
+twitch_conf = config["TWITCH"]
 
-SERVER = "irc.chat.twitch.tv"
-PORT = 6667
-NICKNAME = "nyccoder"
+SERVER = twitch_conf["server"]
+NICKNAME = twitch_conf["nickname"]
 # https://twitchapps.com/tmi/
 TOKEN = os.getenv("TWITCH_OAUTH")
-CHANNEL = "#nyccoder"
+CHANNEL = twitch_conf["channel"]
 
 logging.basicConfig(level=logging.DEBUG,
                     format="%(asctime)s — %(message)s",
                     datefmt="%Y-%m-%d_%H:%M:%S",
-                    handlers=[logging.FileHandler("producer.log", encoding="utf-8")])
+                    handlers=[logging.FileHandler("twitch_vjoy.log", encoding="utf-8")])
+
+try:
+    PORT = int(twitch_conf["port"])
+except TypeError:
+    raise TypeError("provided port in config.ini cannot be parsed to integer")
+
 
 def setup_connection() -> socket.socket:
     sock = socket.socket()

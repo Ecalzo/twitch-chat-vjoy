@@ -1,23 +1,19 @@
 import logging
 import pyvjoy
 import time
+from configparser import ConfigParser
 from queue import Queue
 
-BUTTON_MAPPING = {
-    "up": 1,
-    "down": 2,
-    "left": 3,
-    "right": 4,
-    "start": 5,
-    "select": 6,
-    "b": 7,
-    "a": 8
-}
+config = ConfigParser()
+config.read("config.ini")
+raw_button_mapping = config._sections["BUTTON_MAPPING"]
+# convert unicode string to integer for vJoy
+BUTTON_MAPPING = {cmd: int(btn) for cmd, btn in raw_button_mapping.items()}
 
 logging.basicConfig(level=logging.DEBUG,
                     format="%(asctime)s — %(message)s",
                     datefmt="%Y-%m-%d_%H:%M:%S",
-                    handlers=[logging.FileHandler("consumer.log", encoding="utf-8")])
+                    handlers=[logging.FileHandler("twitch_vjoy.log", encoding="utf-8")])
 
 
 def map_button_press_to_input(button_press: str) -> int:
