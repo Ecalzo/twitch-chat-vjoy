@@ -2,12 +2,11 @@ import socket
 import re
 import os
 import logging
-from configparser import ConfigParser
+from utils.config_utils import get_config
 from queue import Queue
 from datetime import datetime
 
-config = ConfigParser()
-config.read("config.ini")
+config = get_config()
 twitch_conf = config["TWITCH"]
 
 SERVER = twitch_conf["server"]

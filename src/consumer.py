@@ -1,28 +1,14 @@
 import logging
 import pyvjoy
 import time
-from configparser import ConfigParser
+from utils.button_utils import BUTTON_MAPPING, map_button_press_to_input 
 from queue import Queue
-
-config = ConfigParser()
-config.read("config.ini")
-raw_button_mapping = config._sections["BUTTON_MAPPING"]
-# convert unicode string to integer for vJoy
-BUTTON_MAPPING = {cmd: int(btn) for cmd, btn in raw_button_mapping.items()}
 
 logging.basicConfig(level=logging.DEBUG,
                     format="%(asctime)s — %(message)s",
                     datefmt="%Y-%m-%d_%H:%M:%S",
                     handlers=[logging.FileHandler("twitch_vjoy.log", encoding="utf-8")])
 
-
-def map_button_press_to_input(button_press: str) -> int:
-    if button_press in BUTTON_MAPPING:
-        return BUTTON_MAPPING[button_press]
-    elif button_press == "escape":
-        return 0
-    else:
-        return None
 
 def execute_button_press(joy_inpt: int) -> None:
     joy = pyvjoy.VJoyDevice(1)
