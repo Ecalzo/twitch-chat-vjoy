@@ -37,3 +37,4 @@ pytest tests/
 * .ini file for button mapping - DONE
 * remove !press from command, make them like !a or !b - DONE
 * be able to press a button n number of times (limit this) - DONE
+* Redesign as pip-installable wrapper

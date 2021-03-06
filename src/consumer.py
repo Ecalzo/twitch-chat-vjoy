@@ -1,7 +1,7 @@
 import logging
 import pyvjoy
 import time
-from utils.button_utils import BUTTON_MAPPING, map_button_press_to_input 
+from utils.consumer_utils import BUTTON_MAPPING, map_button_press_to_input 
 from queue import Queue
 
 logging.basicConfig(level=logging.DEBUG,

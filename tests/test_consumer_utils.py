@@ -1,5 +1,5 @@
 import pytest
-from src.utils.button_utils import BUTTON_MAPPING, map_button_press_to_input
+from src.utils.consumer_utils import BUTTON_MAPPING, map_button_press_to_input
 
 def test_map_button_press_to_input():
     assert map_button_press_to_input("up") == BUTTON_MAPPING["up"]
