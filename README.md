@@ -16,18 +16,24 @@ Since vJoy is used, Windows 10 is only supported and tested.
 git clone <this_repo>
 $ENV:TWITCH_OATH = "<my_oath_token>"
 pip install -r requirements.txt
-cd src/
-vim producer.py  # update the globals in producer.py  
-python main.py
+vim config.ini  # update the controller and twitch configs  
+python src/main.py
 ```
 
 Chat controls the game like this:
 ```
+nyccoder !right  # results in 1 press of the "right" button
 nyccoder: !up 10  # results in 10 presses up the "up" button
 ```
 
+## Testing
+```
+pip install pytest
+pytest tests/
+```
+
 ## Roadmap/QoL Improvements
-* .ini file for twitch chat setup
-* .ini file for button mapping
+* .ini file for twitch chat setup - DONE (combined w/ button mapping as config.ini)
+* .ini file for button mapping - DONE
 * remove !press from command, make them like !a or !b - DONE
 * be able to press a button n number of times (limit this) - DONE
