@@ -2,18 +2,17 @@
 twitch-chat-vjoy is a tool for converting button presses from twitch chat into raw input for the [vjoy](http://vjoystick.sourceforge.net/site/) application. Vjoy configures nicely with the Dolphin emulator in particular. This project is a work in progress.
 
 ## Architecture
-* 1 Queue    (`src/main.py`)
-* 1 producer (`src/producer.py`)
-* 1 consumer (`src/consumer.py`)
+* Queue    (`src/main.py`)
+* producer (`src/producer.py`)
+* consumer (`src/consumer.py`)
 
-- Producer reads and parses chat for commands then push to the Queue
-- Consumer reads the latest entry in the queue and executes it as a vjoy controller
+- Producer reads and parses chat for commands then pushes to the Queue
+- Consumer reads the latest entry in the queue, decides if its valid input, and executes it as a vjoy controller
 
 ## Usage
-This section will be changing as usage evolves.
 Since vJoy is used, Windows 10 is only supported and tested.
 ```powershell
-git clone <this_repo>
+git clone git@github.com:Ecalzo/twitch-chat-vjoy.git
 $ENV:TWITCH_OATH = "<my_oath_token>"
 pip install -r requirements.txt
 vim config.ini  # update the controller and twitch configs  
@@ -22,7 +21,7 @@ python src/main.py
 
 Chat controls the game like this:
 ```
-nyccoder !right  # results in 1 press of the "right" button
+nyccoder: !right  # results in 1 press of the "right" button
 nyccoder: !up 10  # results in 10 presses up the "up" button
 ```
 
@@ -38,3 +37,6 @@ pytest tests/
 * remove !press from command, make them like !a or !b - DONE
 * be able to press a button n number of times (limit this) - DONE
 * Redesign as pip-installable wrapper
+
+
+![](https://videoapi-muybridge.vimeocdn.com/animated-thumbnails/image/521e77eb-d0d9-49e8-932e-decf6368605f.gif?ClientID=vimeo-core-prod&Date=1615509835&Signature=8ea79ab6b55a60a84ff6cf05d77782b321c77314)
